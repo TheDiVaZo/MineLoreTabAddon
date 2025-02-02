@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '9.0.0-beta6'
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
+    id("xyz.jpenilla.run-paper") version "2.3.1" // Adds runServer and runMojangMappedServer tasks for testing
+    id("xyz.jpenilla.resource-factory-paper-convention") version "1.2.0"
+}
+
+group = 'org.minelore.plugin.tabaddon'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    maven { url 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT'
+    compileOnly 'com.github.NEZNAMY:TAB-API:5.0.5'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+paperPluginYaml {
+    main.set("org.minelore.plugin.tabaddon.TabAddon")
+    authors.add("MineLoreSMP")
+    authors.add("TheDiVaZo")
+    apiVersion.set("1.21")
+    dependencies.server.register("TAB")
+}
